@@ -25,9 +25,13 @@ of your application. You also need to configure a profiling backend. For Rust,
 you can use [pprof-rs](https://github.com/pyroscope-io/pyroscope-rs/tree/main/pyroscope_backends/pyroscope_pprofrs).
 
 ```rust
+// Include Pyroscope and pprof-rs dependencies
+use pyroscope::PyroscopeAgent;
+use pyroscope_pprofrs::{pprof_backend, PprofConfig};
+
 // Configure profiling backend
 let pprof_config = PprofConfig::new().sample_rate(100);
-let pprof_backend = Pprof::new(pprof_config);
+let pprof_backend = pprof_backend(pprof_config);
 
 // Configure Pyroscope Agent
 let agent = PyroscopeAgent::builder("http://localhost:4040", "myapp")
